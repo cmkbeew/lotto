@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/index.html}"
+>
+<head>
+    <title>Board Register</title>
+</head>
+<div layout:fragment="content">
+    <div class="my-3 mx-3">
+        <div class="mb-3" th:with="link = ${pageRequestDTO.getLink()}">
+            <a th:href="|@{/notice/list}?${link}|" class="text-decoration-none">
+                <button type="button" class="btn btn-outline-success">목록</button>
+            </a>
+        </div>
+        <h2>게시글 작성</h2>
+        <form action="/notice/register" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="게시글 제목">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">내용</label>
+                <textarea class="form-control" id="content" name="content" rows="3" placeholder="게시글 내용"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="writer" class="form-label">작성자</label>
+                <input type="text" class="form-control" id="writer" name="writer" placeholder="작성자">
+            </div>
+
+            <div class="my-4">
+                <div class="float-end">
+                    <button type="submit" class="btn btn-primary">완료</button>
+                    <button type="reset" class="btn btn-secondary">취소</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script layout:fragment="script" th:inline="javascript">
+    const errors = [[${errors}]];
+
+    let errorMsg = "";
+
+    if(errors) {
+        for(let i=0; i<errors.length; i++) {
+           errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`;
+        }
+        alert(errorMsg);
+    }
+</script>
