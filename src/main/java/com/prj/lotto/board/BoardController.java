@@ -25,21 +25,22 @@ public class BoardController {
     public void boardList(PageRequestDTO pageRequestDTO, Model model) {
         PageResponseDTO<BoardDTO> dto = boardService.list(pageRequestDTO);
 
-        log.info(pageRequestDTO);
-
         model.addAttribute("dto", dto);
         model.addAttribute("boardType", pageRequestDTO.getBoardType());
     }
 
     @GetMapping("/register")
     public void boardRegisterGet(PageRequestDTO pageRequestDTO) {
-
     }
 
     @PostMapping("/register")
     public String boardRegisterPost(@Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        log.info(boardDTO);
+
         if(bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+
+            redirectAttributes.addFlashAttribute("boardDTO", boardDTO);
 
             return "redirect:/board/register";
         }
@@ -80,9 +81,9 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
-    public String boardRemove(Long bno) {
+    public String boardRemove(Long bno, String boardType) {
         boardService.remove(bno);
 
-        return "redirect:/board/list";
+        return "redirect:/board/list?boardType=" + boardType;
     }
 }

@@ -100,9 +100,11 @@ public class BoardRepositoryTests {
 
         String keyword = "1";
 
+        String boardType = "board";
+
         Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
 
-        Page<Board> result = boardRepository.searchAll(types, keyword, pageable);
+        Page<Board> result = boardRepository.searchAll(types, keyword, boardType, pageable);
 
         log.info(result.getTotalPages());
         log.info(result.getTotalElements());

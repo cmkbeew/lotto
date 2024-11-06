@@ -15,10 +15,11 @@
         </div>
         <form id="boardForm">
             <input type="hidden" id="bno" name="bno" th:value="${dto.bno}">
+            <input type="hidden" id="boardType" name="boardType" th:value="${dto.boardType}">
             <h2>[[${dto.title}]]</h2>
             <div class="d-flex gap-2 p-1 mb-3">
                 <div>[[${dto.writer}]]</div>
-                <div th:text="${#temporals.format(dto.regDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
+                <div th:text="${dto.modDate != null ? '(수정) ' + #temporals.format(dto.modDate, 'yyyy-MM-dd HH:mm:ss') : #temporals.format(dto.regDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
             </div>
             <div class="mb-3">
                 <textarea class="form-control" id="content" rows="10" readonly>[[${dto.content}]]</textarea>
@@ -49,6 +50,5 @@
         form.action = "/board/remove";
         form.method = "post";
         form.submit();
-
     });
 </script>

@@ -70,7 +70,7 @@ public class BoardServiceImpl implements BoardService {
                 .map(board -> modelMapper.map(board, BoardDTO.class))
                 .collect(Collectors.toList());
 
-        dtoList.forEach(dto -> dto.setContent(dto.getContent().substring(0, 5) + "....."));
+//        dtoList.forEach(dto -> dto.setContent(dto.getContent().substring(0, 5) + "....."));
 
         return PageResponseDTO.<BoardDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)

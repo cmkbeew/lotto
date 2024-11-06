@@ -16,17 +16,17 @@ public class BoardDTO {
 
     private Long bno;
 
-    @NotBlank
-    @Size(min = 3)
+    @NotBlank(message = "제목을 입력하세요.")
+    @Size(min = 3, max = 100, message = "3 ~ 100자 이내로 입력하세요.")
     private String title;
 
-    @NotBlank
+    @NotBlank(message = "내용을 입력하세요.")
     private String content;
 
-    @NotBlank
+    @NotBlank(message = "작성자를 입력하세요.")
     private String writer;
 
-    @NotBlank
+    @NotBlank(message = "게시판 종류를 선택하세요.")
     private String boardType;
 
     private String fixed;

@@ -14,16 +14,18 @@
             <select id="boardType" name="boardType" th:value="${boardType}" onchange="changeBoard()">
                 <option value="board" th:selected="${boardType == 'board'}">자유게시판</option>
                 <option value="notice" th:selected="${boardType == 'notice'}">공지사항</option>
+                <option value="qna" th:selected="${boardType == 'qna'}">Q&A</option>
             </select>
         </h2>
         <div class="d-flex justify-content-end">
-            <a href="/board/register">
-                <button type="button" class="btn btn-secondary">게시글 작성</button>
+            <a th:href="@{/board/register(boardType=${boardType})}">
+                <button type="button" class="btn btn-secondary">글쓰기</button>
             </a>
         </div>
         <form id="search-board" class="mt-3" action="/board/list" method="get">
             <div class="col">
                 <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
+                <input type="hidden" name="boardType" th:value="${boardType}">
                 <div class="input-group d-flex gap-2">
                     <div class="input-group-prepend">
                         <select class="form-select" name="type">
@@ -45,7 +47,7 @@
         </form>
 
         <ul class="list-group mt-3" th:with="link = ${pageRequestDTO.getLink()}">
-            <li class="list-group-item d-flex gap-1 justify-content-center align-items-center" th:each="dto: ${dto.dtoList}">
+            <li class="list-group-item d-flex gap-1 justify-content-center align-items-center" th:if="${dto != null}" th:each="dto: ${dto.dtoList}">
                 <div>
                     [[${dto.bno}]]
                 </div>
@@ -55,6 +57,9 @@
                 </a>
                 <div th:text="${#temporals.format(dto.regDate, 'yyyy-MM-dd')}"></div>
                 <span class="badge text-bg-primary rounded-pill" th:if="${boardType == 'board'}">14</span>
+            </li>
+            <li class="list-group-item d-flex gap-1 justify-content-center align-items-center" th:if="${dto.dtoList== null}">
+                <div>검색 결과가 없습니다.</div>
             </li>
         </ul>
         <nav class="mt-3" aria-label="Page navigation example">
@@ -102,7 +107,6 @@
         e.preventDefault();
         e.stopPropagation();
 
-        // self.location = "/board/list";
         changeBoard();
     });
 

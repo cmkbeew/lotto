@@ -22,7 +22,12 @@
         <h2>게시글 작성</h2>
         <form action="/board/modify" method="post">
             <input type="hidden" id="bno" name="bno" th:value="${dto.bno}">
-            <input type="hidden" id="boardType" name="boartType" th:value="${dto.boardType}">
+            <div class="mb-3 d-flex align-items-center gap-2">
+                <span>분류</span>
+                <input type="radio" class="form-check-input" id="boardType" name="boardType" th:value="${dto.boardType}" checked>
+                <label for="boardType">[[${dto.boardType}]]</label>
+                <div id="boardTypeErrorMsg" class="errorMsg"></div>
+            </div>
             <div class="mb-3">
                 <label for="title" class="form-label">제목</label>
                 <input type="text" class="form-control" id="title" name="title" th:value="${dto.title}" placeholder="게시글 제목">
@@ -36,6 +41,7 @@
             <div class="mb-3">
                 <label for="writer" class="form-label">작성자</label>
                 <input type="text" class="form-control" id="writer" name="writer" th:value="${dto.writer}" placeholder="작성자" readonly>
+                <div id=" writerErrorMsg" class="errorMsg"></div>
             </div>
             <div class="mb-3">
                 <label for="regDate" class="form-label">작성일</label>

@@ -22,10 +22,13 @@
         <h2 class="mb-3">게시글 작성</h2>
         <form action="/board/register" method="post">
             <div class="mb-3">
-                <input type="radio" id="board" class="form-check-input" name="boardType" value="board" checked>
+                <input type="radio" id="board" class="form-check-input" name="boardType" value="board">
                 <label for="board">자유 게시판</label>
                 <input type="radio" id="notice" class="form-check-input" name="boardType" value="notice">
                 <label for="notice">공지 사항</label>
+                <input type="radio" id="qna" class="form-check-input" name="boardType" value="qna">
+                <label for="qna">Q&A</label>
+                <div id="boardTypeErrorMsg" class="errorMsg"></div>
             </div>
             <div class="mb-3">
                 <label for="title" class="form-label">제목</label>
