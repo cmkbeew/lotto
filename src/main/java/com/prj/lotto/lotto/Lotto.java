@@ -43,19 +43,34 @@ public class Lotto {
     @Column(nullable = false)
     private int n6;
 
+    @Builder.Default
     @Column(nullable = false)
-    private int bonus;
+    private int bonus = 0;
 
     @Column(nullable = false)
     private String member;
 
     private String status;
 
-    private int price;
+    @Builder.Default
+    private String winResult = "-";
+
+    @Builder.Default
+    private long price = 1000;
+
+    @Builder.Default
+    private double winPrice = 0.0;
 
     @CreatedDate
     @Column(name = "buyDate", updatable = false)
     private LocalDateTime buyDate;
 
     private LocalDateTime endDate;
+
+    // 당첨 결과로 수정
+    public void modify(String status, String winResult, double winPrice) {
+        this.status = status;
+        this.winResult = winResult;
+        this.winPrice = winPrice;
+    }
 }

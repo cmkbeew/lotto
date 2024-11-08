@@ -46,7 +46,11 @@ public class LottoDTO {
 
     private String status;
 
-    private int price;
+    private String winResult;
+
+    private long price;
+
+    private double winPrice;
 
     private LocalDateTime buyDate;
 

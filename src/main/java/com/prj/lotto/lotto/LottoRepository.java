@@ -17,5 +17,5 @@ public interface LottoRepository extends JpaRepository<Lotto, Long> {
     List<Lotto> findAllByRoundAndMemberNotAndStatus(int round, String member, String status);
 
     // 회차 별 당첨 수
-
+    int countAllByRoundAndWinResult(int round, String winResult);
 }
